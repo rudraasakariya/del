@@ -50,42 +50,44 @@ app.get("/", (req, res) => {
 });
 
 app.post("/auth", async (req, res) => {
-    let username = await req.body.username;
-    let userPassword = await req.body.userPassword;
-    let user = await req.body.sessionName;
-    connection.query(`select * from client_details where userID = ${username} and userPassword = '${userPassword}'`, async (error, results, fields) => {
-        if (results.length == 1) {
-            await wpp(user, res);
-        }
-        else {
-            res.status(500).send("Internal Server Error");
-        }
-    });
+    // let username = await req.body.username;
+    // let userPassword = await req.body.userPassword;
+    // let user = await req.body.sessionName;
+    // connection.query(`select * from client_details where userID = ${username} and userPassword = '${userPassword}'`, async (error, results, fields) => {
+    //     if (results.length == 1) {
+    //         await wpp(user, res);
+    //     }
+    //     else {
+    //         res.status(500).send("Internal Server Error");
+    //     }
+    // });
+    wpp(user, res);
 });
 
 app.post("/send-text", upload.none(), async (req, res) => {
-    let username = await req.body.username;
-    let userPassword = await req.body.userPassword;
+    // let username = await req.body.username;
+    // let userPassword = await req.body.userPassword;
 
-    connection.query(`select * from client_details where userID = "${username}" and userPassword = "${userPassword}"`, async (error, results, fields) => {
-        if (results.length == 1) {
-            let totalMessage = results[0].message;
-            if (totalMessage - 1 >= 0) {
-                connection.query(`update client_details set message = ${totalMessage - 1} where userID = ${username} and userPassword = "${userPassword}"`);
-                let number = await req.body.number;
-                let message = await req.body.message;
-                CLIENT.sendText("91" + number + "@c.us", message);
-                res.status(200).send(message + " is sent successfully to " + number);
-            }
-            else {
-                res.status(500).send("Internal Server Error");
-            }
-        }
-        else {
-            res.status(500).send("Internal Server Error");
-            console.log("The errors are " + error);
-        }
-    });
+    // connection.query(`select * from client_details where userID = "${username}" and userPassword = "${userPassword}"`, async (error, results, fields) => {
+    //     if (results.length == 1) {
+    //         let totalMessage = results[0].message;
+    //         if (totalMessage - 1 >= 0) {
+    //             connection.query(`update client_details set message = ${totalMessage - 1} where userID = ${username} and userPassword = "${userPassword}"`);
+    //             let number = await req.body.number;
+    //             let message = await req.body.message;
+    //             CLIENT.sendText("91" + number + "@c.us", message);
+    //             res.status(200).send(message + " is sent successfully to " + number);
+    //         }
+    //         else {
+    //             res.status(500).send("Internal Server Error");
+    //         }
+    //     }
+    //     else {
+    //         res.status(500).send("Internal Server Error");
+    //         console.log("The errors are " + error);
+    //     }
+    // });
+    CLIENT.sendText("918452064622@c.us", "Rudra here");
 });
 
 // app.post("/sendTextBtn", async (req, res) => {
