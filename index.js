@@ -17,9 +17,10 @@ function sleep(ms) {
 }
 
 let connection = mysql.createConnection({
-    host: "http://108.179.246.59/",
+    host: "108.179.246.70",
+    port: "3306",
     user: "invenpyy_whatsapphatim",
-    password: "whatsapphatim",
+    password: "1234567",
     database: "invenpyy_whatsappapihatim"
 });
 
@@ -52,9 +53,6 @@ app.post("/auth", async (req, res) => {
     let username = await req.body.username;
     let userPassword = await req.body.userPassword;
     let user = await req.body.sessionName;
-    connection.query(`select 1 + 1 from solution`, (errors, results, fields) => {
-        console.log(results);
-    });
     connection.query(`select * from client_details where userID = ${username} and userPassword = '${userPassword}'`, async (error, results, fields) => {
         if (results.length == 1) {
             await wpp(user, res);
@@ -287,7 +285,10 @@ app.post("/send-image", upload.single("image"), async (req, res) => {
                     let number = await req.body.number;
                     let filename = await req.body.filename;
                     let caption = await req.body.caption;
-                    CLIENT.sendImage("91" + number + "@c.us", req.file.path, `${filename}`, `${caption}`);
+                    await CLIENT.sendImage("91" + number + "@c.us", req.file.path, `${filename}`, `${caption}`);
+                    fs.unlink(req.file.path, (err) => {
+                        if (err) throw err;
+                    });
                     res.status(200).send(caption + " is sent successfully to " + number);
                 }
                 else {
@@ -317,7 +318,10 @@ app.post("/send-document", upload.single("document"), async (req, res) => {
                 let number = await req.body.number;
                 let filename = await req.body.filename;
                 let caption = await req.body.caption;
-                CLIENT.sendFile("91" + number + "@c.us", req.file.path, { filename: filename, });
+                await CLIENT.sendFile("91" + number + "@c.us", req.file.path, { filename: filename, });
+                fs.unlink(req.file.path, (err) => {
+                    if (err) throw err;
+                });
                 res.status(200).send(caption + " is sent successfully to " + number);
             }
             else {
