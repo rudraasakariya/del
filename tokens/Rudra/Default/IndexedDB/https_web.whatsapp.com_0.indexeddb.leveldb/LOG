@@ -1,59 +1,14 @@
-2022/09/28-18:50:35.456 4950 Reusing MANIFEST C:\Users\rudra\Desktop\WhatsApp Server\tokens\Rudra\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-004250
-2022/09/28-18:50:35.456 4950 Recovering log #4947
-2022/09/28-18:50:35.476 4950 Reusing old log C:\Users\rudra\Desktop\WhatsApp Server\tokens\Rudra\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/004947.log 
-2022/09/28-18:50:35.476 4950 Delete type=2 #4937
-2022/09/28-18:50:35.476 4950 Delete type=2 #4938
-2022/09/28-18:50:35.476 4950 Delete type=2 #4939
-2022/09/28-18:50:35.476 4950 Delete type=2 #4940
-2022/09/28-18:50:35.476 4950 Delete type=2 #4941
-2022/09/28-18:50:35.476 4950 Delete type=2 #4942
-2022/09/28-18:50:35.476 4950 Delete type=2 #4943
-2022/09/28-18:50:35.476 4950 Delete type=2 #4944
-2022/09/28-18:50:35.476 4950 Delete type=2 #4950
-2022/09/28-18:50:48.997 4c88 Level-0 table #4969: started
-2022/09/28-18:50:49.018 4c88 Level-0 table #4969: 1103975 bytes OK
-2022/09/28-18:50:49.020 4c88 Delete type=0 #4947
-2022/09/28-18:50:49.969 4890 Compacting 1@0 + 0@1 files
-2022/09/28-18:50:49.991 4890 Generated table #4970@0: 16803 keys, 382927 bytes
-2022/09/28-18:50:49.996 4890 Generated table #4971@0: 2522 keys, 93556 bytes
-2022/09/28-18:50:49.996 4890 Compacted 1@0 + 0@1 files => 476483 bytes
-2022/09/28-18:50:49.996 4890 compacted to: files[ 0 3 36 0 0 0 0 ]
-2022/09/28-18:50:49.997 4890 Delete type=2 #4969
-2022/09/28-18:50:50.379 4950 Compacting 1@1 + 6@2 files
-2022/09/28-18:50:50.438 4950 Generated table #4972@1: 44606 keys, 2261604 bytes
-2022/09/28-18:50:50.486 4950 Generated table #4973@1: 39626 keys, 2264132 bytes
-2022/09/28-18:50:50.526 4950 Generated table #4974@1: 35721 keys, 2274536 bytes
-2022/09/28-18:50:50.572 4950 Generated table #4975@1: 43964 keys, 2270510 bytes
-2022/09/28-18:50:50.615 4950 Generated table #4976@1: 40131 keys, 2263545 bytes
-2022/09/28-18:50:50.657 4950 Generated table #4977@1: 38286 keys, 2273633 bytes
-2022/09/28-18:50:50.661 4950 Generated table #4978@1: 1192 keys, 72051 bytes
-2022/09/28-18:50:50.662 4950 Compacted 1@1 + 6@2 files => 13680011 bytes
-2022/09/28-18:50:50.662 4950 compacted to: files[ 0 2 37 0 0 0 0 ]
-2022/09/28-18:50:50.663 4950 Delete type=2 #4951
-2022/09/28-18:50:50.663 4950 Delete type=2 #4952
-2022/09/28-18:50:50.663 4950 Delete type=2 #4953
-2022/09/28-18:50:50.663 4950 Delete type=2 #4954
-2022/09/28-18:50:50.663 4950 Delete type=2 #4955
-2022/09/28-18:50:50.663 4950 Delete type=2 #4956
-2022/09/28-18:50:50.663 4950 Delete type=2 #4970
-2022/09/28-18:50:51.453 4950 Compacting 1@1 + 8@2 files
-2022/09/28-18:50:51.511 4950 Generated table #4979@1: 66882 keys, 2708926 bytes
-2022/09/28-18:50:51.534 4950 Generated table #4980@1: 13214 keys, 2173111 bytes
-2022/09/28-18:50:51.553 4950 Generated table #4981@1: 3151 keys, 2156830 bytes
-2022/09/28-18:50:51.572 4950 Generated table #4982@1: 4527 keys, 2158562 bytes
-2022/09/28-18:50:51.598 4950 Generated table #4983@1: 17149 keys, 2185200 bytes
-2022/09/28-18:50:51.647 4950 Generated table #4984@1: 29372 keys, 2266033 bytes
-2022/09/28-18:50:51.692 4950 Generated table #4985@1: 33593 keys, 2234501 bytes
-2022/09/28-18:50:51.728 4950 Generated table #4986@1: 21481 keys, 2208166 bytes
-2022/09/28-18:50:51.731 4950 Generated table #4987@1: 124 keys, 26785 bytes
-2022/09/28-18:50:51.731 4950 Compacted 1@1 + 8@2 files => 18118114 bytes
-2022/09/28-18:50:51.732 4950 compacted to: files[ 0 1 38 0 0 0 0 ]
-2022/09/28-18:50:51.732 4950 Delete type=2 #4958
-2022/09/28-18:50:51.732 4950 Delete type=2 #4959
-2022/09/28-18:50:51.732 4950 Delete type=2 #4960
-2022/09/28-18:50:51.732 4950 Delete type=2 #4961
-2022/09/28-18:50:51.732 4950 Delete type=2 #4962
-2022/09/28-18:50:51.732 4950 Delete type=2 #4963
-2022/09/28-18:50:51.732 4950 Delete type=2 #4964
-2022/09/28-18:50:51.732 4950 Delete type=2 #4965
-2022/09/28-18:50:51.732 4950 Delete type=2 #4971
+2022/10/02-01:47:51.642 ecc Reusing MANIFEST C:\Users\rudra\Desktop\deploy\tokens\Rudra\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2022/10/02-01:47:51.642 ecc Recovering log #29
+2022/10/02-01:47:51.677 ecc Reusing old log C:\Users\rudra\Desktop\deploy\tokens\Rudra\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000029.log 
+2022/10/02-01:48:05.495 1634 Level-0 table #35: started
+2022/10/02-01:48:05.596 1634 Level-0 table #35: 1250538 bytes OK
+2022/10/02-01:48:05.598 1634 Delete type=0 #29
+2022/10/02-01:48:05.805 f00 Compacting 1@1 + 2@2 files
+2022/10/02-01:48:05.914 f00 Generated table #36@1: 41456 keys, 2251945 bytes
+2022/10/02-01:48:05.984 f00 Generated table #37@1: 25641 keys, 1186662 bytes
+2022/10/02-01:48:05.984 f00 Compacted 1@1 + 2@2 files => 3438607 bytes
+2022/10/02-01:48:05.985 f00 compacted to: files[ 0 0 2 0 0 0 0 ]
+2022/10/02-01:48:05.985 f00 Delete type=2 #31
+2022/10/02-01:48:05.985 f00 Delete type=2 #32
+2022/10/02-01:48:05.985 f00 Delete type=2 #35

@@ -1,42 +1,14 @@
-2022/09/28-18:49:00.163 3c98 Reusing MANIFEST C:\Users\rudra\Desktop\WhatsApp Server\tokens\Rudra\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-004250
-2022/09/28-18:49:00.164 3c98 Recovering log #4926
-2022/09/28-18:49:00.195 3c98 Reusing old log C:\Users\rudra\Desktop\WhatsApp Server\tokens\Rudra\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/004926.log 
-2022/09/28-18:49:10.826 3c98 Level-0 table #4948: started
-2022/09/28-18:49:10.842 3c98 Level-0 table #4948: 1117385 bytes OK
-2022/09/28-18:49:10.844 3c98 Delete type=0 #4926
-2022/09/28-18:49:12.263 3c98 Compacting 1@0 + 0@1 files
-2022/09/28-18:49:12.279 3c98 Generated table #4949@0: 20119 keys, 428341 bytes
-2022/09/28-18:49:12.283 3c98 Generated table #4950@0: 3049 keys, 120602 bytes
-2022/09/28-18:49:12.284 3c98 Compacted 1@0 + 0@1 files => 548943 bytes
-2022/09/28-18:49:12.284 3c98 compacted to: files[ 0 3 35 0 0 0 0 ]
-2022/09/28-18:49:12.285 3c98 Delete type=2 #4948
-2022/09/28-18:49:12.361 1ea8 Compacting 1@1 + 7@2 files
-2022/09/28-18:49:12.426 1ea8 Generated table #4951@1: 44978 keys, 2258629 bytes
-2022/09/28-18:49:12.482 1ea8 Generated table #4952@1: 39789 keys, 2263594 bytes
-2022/09/28-18:49:12.529 1ea8 Generated table #4953@1: 35744 keys, 2273598 bytes
-2022/09/28-18:49:12.592 1ea8 Generated table #4954@1: 44137 keys, 2270353 bytes
-2022/09/28-18:49:12.642 1ea8 Generated table #4955@1: 39981 keys, 2263463 bytes
-2022/09/28-18:49:12.694 1ea8 Generated table #4956@1: 38342 keys, 2275734 bytes
-2022/09/28-18:49:12.710 1ea8 Generated table #4957@1: 11190 keys, 676455 bytes
-2022/09/28-18:49:12.710 1ea8 Compacted 1@1 + 7@2 files => 14281826 bytes
-2022/09/28-18:49:12.711 1ea8 compacted to: files[ 0 2 35 0 0 0 0 ]
-2022/09/28-18:49:12.736 1ea8 Compacting 1@1 + 8@2 files
-2022/09/28-18:49:12.800 1ea8 Generated table #4958@1: 64910 keys, 2707271 bytes
-2022/09/28-18:49:12.830 1ea8 Generated table #4959@1: 13200 keys, 2171888 bytes
-2022/09/28-18:49:12.857 1ea8 Generated table #4960@1: 3153 keys, 2156313 bytes
-2022/09/28-18:49:12.884 1ea8 Generated table #4961@1: 4519 keys, 2157063 bytes
-2022/09/28-18:49:12.925 1ea8 Generated table #4962@1: 17704 keys, 2186165 bytes
-2022/09/28-18:49:12.977 1ea8 Generated table #4963@1: 29144 keys, 2266164 bytes
-2022/09/28-18:49:13.027 1ea8 Generated table #4964@1: 33791 keys, 2235746 bytes
-2022/09/28-18:49:13.067 1ea8 Generated table #4965@1: 21020 keys, 2204611 bytes
-2022/09/28-18:49:13.069 1ea8 Generated table #4966@1: 151 keys, 49305 bytes
-2022/09/28-18:49:13.069 1ea8 Compacted 1@1 + 8@2 files => 18134526 bytes
-2022/09/28-18:49:13.070 1ea8 compacted to: files[ 0 1 36 0 0 0 0 ]
-2022/09/28-18:49:13.070 1ea8 Delete type=2 #4930
-2022/09/28-18:49:13.070 1ea8 Delete type=2 #4931
-2022/09/28-18:49:13.070 1ea8 Delete type=2 #4932
-2022/09/28-18:49:13.070 1ea8 Delete type=2 #4933
-2022/09/28-18:49:13.070 1ea8 Delete type=2 #4934
-2022/09/28-18:49:13.070 1ea8 Delete type=2 #4935
-2022/09/28-18:49:13.070 1ea8 Delete type=2 #4936
-2022/09/28-18:49:13.070 1ea8 Delete type=2 #4949
+2022/10/02-01:44:23.795 4f04 Reusing MANIFEST C:\Users\rudra\Desktop\deploy\tokens\Rudra\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2022/10/02-01:44:23.795 4f04 Recovering log #24
+2022/10/02-01:44:23.836 4f04 Reusing old log C:\Users\rudra\Desktop\deploy\tokens\Rudra\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000024.log 
+2022/10/02-01:44:34.981 1adc Level-0 table #30: started
+2022/10/02-01:44:35.056 1adc Level-0 table #30: 1201356 bytes OK
+2022/10/02-01:44:35.058 1adc Delete type=0 #24
+2022/10/02-01:44:35.536 1bd8 Compacting 1@1 + 2@2 files
+2022/10/02-01:44:35.698 1bd8 Generated table #31@1: 39180 keys, 2248386 bytes
+2022/10/02-01:44:35.734 1bd8 Generated table #32@1: 22669 keys, 909896 bytes
+2022/10/02-01:44:35.734 1bd8 Compacted 1@1 + 2@2 files => 3158282 bytes
+2022/10/02-01:44:35.734 1bd8 compacted to: files[ 0 0 2 0 0 0 0 ]
+2022/10/02-01:44:35.735 1bd8 Delete type=2 #26
+2022/10/02-01:44:35.735 1bd8 Delete type=2 #27
+2022/10/02-01:44:35.735 1bd8 Delete type=2 #30

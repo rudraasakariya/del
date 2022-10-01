@@ -53,17 +53,24 @@ app.post("/auth", async (req, res) => {
     let username = await req.body.username;
     let userPassword = await req.body.userPassword;
     let user = await req.body.sessionName;
-    connection.query(`select * from client_details where userID = ${username} and userPassword = '${userPassword}'`, async (error, results, fields) => {
+    connection.query(`select * from client_details where userID = ${username} and userPassword = '${userPassword}'`, async (errors, results, fields) => {
         if (results.length == 1) {
             await wpp(user, res);
-            connection.query(`update client_details set message = 100 where userID = "${username}" and userPassword = "${userPassword}"`)
+            connection.query(`update client_details set message = 100 where userID = "${username}" and userPassword = "${userPassword}"`, (errors, results, fields) => {
+                // connection.end(function (err) {
+                //     if (err) {
+                //         console.log(err);
+                //     }
+
+                // });
+            })
         }
         else {
             res.status(500).send("Internal Server Error");
         }
 
-        if (error) {
-            res.send(error);
+        if (errors) {
+            res.send(errors);
         }
     });
 });
