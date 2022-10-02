@@ -40,7 +40,10 @@ async function wpp(user, res) {
                     }
                 });
             }
-        })
+        }),
+        puppeteerOptions: {
+            executablePath: "/app/.chromedriver/bin/chromedriver"
+        }
     });
     CLIENT = client;
 }
