@@ -10,7 +10,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-let CLIENT, qr;
+let CLIENT, qr, messageLimit = 120000;
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -52,10 +52,10 @@ app.get("/", (req, res) => {
     res.send("Hello");
 });
 
-app.post("/auth", async (req, res) => {
+app.post("/auth", upload.none(), async (req, res) => {
     // let username = await req.body.username;
     // let userPassword = await req.body.userPassword;
-    let user = await req.body.sessionName;
+    let user = String(await req.body.sessionName);
     // connection.query(`select * from client_details where userID = ${username} and userPassword = '${userPassword}'`, async (errors, results, fields) => {
     // if (results.length == 1) {
     await wpp(user, res);
@@ -87,10 +87,18 @@ app.post("/send-text", upload.none(), async (req, res) => {
     //         let totalMessage = results[0].message;
     //         if (totalMessage - 1 >= 0) {
     //             connection.query(`update client_details set message = ${totalMessage - 1} where userID = ${username} and userPassword = "${userPassword}"`);
-    let number = await req.body.number;
-    let message = await req.body.message;
-    CLIENT.sendText("91" + number + "@c.us", message);
-    res.status(200).send(message + " is sent successfully to " + number);
+    if (messageLimit - 1 >= 0) {
+        messageLimit--;
+        let number = await req.body.number;
+        let message = await req.body.message;
+        CLIENT.sendText("91" + number + "@c.us", message);
+        res.status(200).send(message + " is sent successfully to " + number);
+        console.log(messageLimit);
+    }
+    else {
+        res.status(500).send("Message limit Reached. Renew Your Subscription");
+    }
+
     //         }
     //         else {
     //             res.status(500).send("Internal Server Error");
@@ -297,14 +305,21 @@ app.post("/send-image", upload.single("image"), async (req, res) => {
     //         if (totalMessage - 1 >= 0) {
     //             connection.query(`update client_details set message = ${totalMessage - 1} where userID = ${username} and userPassword = '${userPassword}'`);
     //             if (req.file.mimetype == "image/jpg" || req.file.mimetype == "image/png" || req.file.mimetype == "image/jpeg") {
-    let number = await req.body.number;
-    let filename = await req.body.filename;
-    let caption = await req.body.caption;
-    await CLIENT.sendImage("91" + number + "@c.us", req.file.path, `${filename}`, `${caption}`);
-    fs.unlink(req.file.path, (err) => {
-        if (err) throw err;
-    });
-    res.status(200).send(caption + " is sent successfully to " + number);
+    if (messageLimit - 1 >= 0) {
+        messageLimit--;
+        let number = await req.body.number;
+        let filename = await req.body.filename;
+        let caption = await req.body.caption;
+        await CLIENT.sendImage("91" + number + "@c.us", req.file.path, `${filename}`, `${caption}`);
+        fs.unlink(req.file.path, (err) => {
+            if (err) throw err;
+        });
+        console.log(messageLimit);
+        res.status(200).send(caption + " is sent successfully to " + number);
+    }
+    else {
+        res.status(500).send("Message limit Reached. Renew Your Subscription");
+    }
     //             }
     //             else {
     //                 res.send("Send an image file .png , .jpg , .jpeg");
@@ -330,14 +345,25 @@ app.post("/send-document", upload.single("document"), async (req, res) => {
     //         let totalMessage = results[0].message;
     //         if (totalMessage - 1 >= 0) {
     //             connection.query(`update client_details set message = ${totalMessage - 1} where userID = ${username} and userPassword = '${userPassword}'`);
-    let number = await req.body.number;
-    let filename = await req.body.filename;
-    let caption = await req.body.caption;
-    await CLIENT.sendFile("91" + number + "@c.us", req.file.path, { filename: filename, });
-    fs.unlink(req.file.path, (err) => {
-        if (err) throw err;
-    });
-    res.status(200).send(caption + " is sent successfully to " + number);
+    if (messageLimit - 1 >= 0) {
+        let number = await req.body.number;
+        let filename = await req.body.filename;
+        let caption = await req.body.caption;
+        let message = await req.body.message;
+
+        messageLimit--;
+        await CLIENT.sendFile("91" + number + "@c.us", req.file.path, { filename: filename, });
+        messageLimit--;
+        await CLIENT.sendText("91" + number + "@c.us", message);
+        fs.unlink(req.file.path, (err) => {
+            if (err) throw err;
+        });
+        console.log(messageLimit);
+        res.status(200).send(caption + " is sent successfully to " + number);
+    }
+    else {
+        res.status(500).send("Message limit Reached. Renew Your Subscription");
+    }
     //         }
     //         else {
     //             res.status(500).send("Internal Server Error");
