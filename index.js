@@ -42,17 +42,21 @@ async function wpp(user, res) {
             }
         }),
         puppeteerOptions: {
-            executablePath: "/app/.chromedriver/bin/chromedriver"
+            executablePath: "./chromedriver"
         }
     });
     CLIENT = client;
 }
 
-app.get("/", (req, res) => {
+app.get("/whatsapp-hatim/", (req, res) => {
     res.send("Hello");
 });
 
-app.post("/auth", upload.none(), async (req, res) => {
+app.get("/whatsapp-hatim/auth", (req, res) => {
+    res.send("a");
+});
+
+app.post("/whatsapp-hatim/auth", upload.none(), async (req, res) => {
     // let username = await req.body.username;
     // let userPassword = await req.body.userPassword;
     let user = String(await req.body.sessionName);
@@ -78,7 +82,7 @@ app.post("/auth", upload.none(), async (req, res) => {
     // });
 });
 
-app.post("/send-text", upload.none(), async (req, res) => {
+app.post("/whatsapp-hatim/send-text", upload.none(), async (req, res) => {
     // let username = await req.body.username;
     // let userPassword = await req.body.userPassword;
 
@@ -295,7 +299,7 @@ app.post("/send-text", upload.none(), async (req, res) => {
 //     res.status(200).end(buf);
 // });
 
-app.post("/send-image", upload.single("image"), async (req, res) => {
+app.post("/whatsapp-hatim/send-image", upload.single("image"), async (req, res) => {
     // let username = await req.body.username;
     // let userPassword = await req.body.userPassword;
 
@@ -336,7 +340,7 @@ app.post("/send-image", upload.single("image"), async (req, res) => {
     // });
 });
 
-app.post("/send-document", upload.single("document"), async (req, res) => {
+app.post("/whatsapp-hatim/send-document", upload.single("document"), async (req, res) => {
     // let username = await req.body.username;
     // let userPassword = await req.body.userPassword;
 
