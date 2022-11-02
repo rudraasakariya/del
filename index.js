@@ -10,7 +10,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-let CLIENT, qr, messageLimit = 120000;
+let CLIENT, qr;
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -40,10 +40,10 @@ async function wpp(user, res) {
                     }
                 });
             }
-        }),
-        puppeteerOptions: {
-            executablePath: "./chromedriver"
-        }
+            else {
+                res.send("Authenticated");
+            }
+        })
     });
     CLIENT = client;
 }
@@ -57,62 +57,45 @@ app.get("/whatsapp-hatim/auth", (req, res) => {
 });
 
 app.post("/whatsapp-hatim/auth", upload.none(), async (req, res) => {
-    // let username = await req.body.username;
-    // let userPassword = await req.body.userPassword;
+    let username = await req.body.username;
+    let userPassword = await req.body.userPassword;
     let user = String(await req.body.sessionName);
-    // connection.query(`select * from client_details where userID = ${username} and userPassword = '${userPassword}'`, async (errors, results, fields) => {
-    // if (results.length == 1) {
-    await wpp(user, res);
-    // connection.query(`update client_details set message = 100 where userID = "${username}" and userPassword = "${userPassword}"`, (errors, results, fields) => {
-    // connection.end(function (err) {
-    //     if (err) {
-    //         console.log(err);
-    //     }
-
-    // });
-    // });
-    // }
-    // else {
-    //     res.status(500).send("Internal Server Error");
-    // }
-
-    // if (errors) {
-    //     res.send(errors);
-    // }
-    // });
+    connection.query(`select * from client_details where userID = ${username} and userPassword = '${userPassword}'`, async (errors, results, fields) => {
+        if (results.length == 1) {
+            await wpp(user, res);
+            connection.query(`update client_details set message = 100 where userID = "${username}" and userPassword = "${userPassword}"`, (errors, results, fields) => {
+            });
+        }
+        else {
+            res.status(500).send("Internal Server Error");
+        }
+    });
 });
 
 app.post("/whatsapp-hatim/send-text", upload.none(), async (req, res) => {
-    // let username = await req.body.username;
-    // let userPassword = await req.body.userPassword;
+    let username = await req.body.username;
+    let userPassword = await req.body.userPassword;
 
-    // connection.query(`select * from client_details where userID = "${username}" and userPassword = "${userPassword}"`, async (error, results, fields) => {
-    //     if (results.length == 1) {
-    //         let totalMessage = results[0].message;
-    //         if (totalMessage - 1 >= 0) {
-    //             connection.query(`update client_details set message = ${totalMessage - 1} where userID = ${username} and userPassword = "${userPassword}"`);
-    if (messageLimit - 1 >= 0) {
-        messageLimit--;
-        let number = await req.body.number;
-        let message = await req.body.message;
-        CLIENT.sendText("91" + number + "@c.us", message);
-        res.status(200).send(message + " is sent successfully to " + number);
-        console.log(messageLimit);
-    }
-    else {
-        res.status(500).send("Message limit Reached. Renew Your Subscription");
-    }
+    connection.query(`select * from client_details where userID = "${username}" and userPassword = "${userPassword}"`, async (error, results, fields) => {
+        if (results.length == 1) {
+            let totalMessage = results[0].message;
+            if (totalMessage - 1 >= 0) {
+                connection.query(`update client_details set message = ${totalMessage - 1} where userID = ${username} and userPassword = "${userPassword}"`);
+                let number = await req.body.number;
+                let message = await req.body.message;
+                CLIENT.sendText("91" + number + "@c.us", message);
+                res.status(200).send(message + " is sent successfully to " + number);
 
-    //         }
-    //         else {
-    //             res.status(500).send("Internal Server Error");
-    //         }
-    //     }
-    //     else {
-    //         res.status(500).send("Internal Server Error");
-    //         console.log("The errors are " + error);
-    //     }
-    // });
+            }
+            else {
+                res.status(500).send("Message limit Reached. Renew Your Subscription");
+            }
+
+        }
+        else {
+            res.status(500).send("Internal Server Error");
+        }
+    });
 });
 
 // app.post("/sendTextBtn", async (req, res) => {
@@ -300,84 +283,71 @@ app.post("/whatsapp-hatim/send-text", upload.none(), async (req, res) => {
 // });
 
 app.post("/whatsapp-hatim/send-image", upload.single("image"), async (req, res) => {
-    // let username = await req.body.username;
-    // let userPassword = await req.body.userPassword;
+    let username = await req.body.username;
+    let userPassword = await req.body.userPassword;
 
-    // connection.query(`select * from client_details where userID = ${username} and userPassword = '${userPassword}'`, async (error, results, fields) => {
-    //     if (results.length == 1) {
-    //         let totalMessage = results[0].message;
-    //         if (totalMessage - 1 >= 0) {
-    //             connection.query(`update client_details set message = ${totalMessage - 1} where userID = ${username} and userPassword = '${userPassword}'`);
-    //             if (req.file.mimetype == "image/jpg" || req.file.mimetype == "image/png" || req.file.mimetype == "image/jpeg") {
-    if (messageLimit - 1 >= 0) {
-        messageLimit--;
-        let number = await req.body.number;
-        let filename = await req.body.filename;
-        let caption = await req.body.caption;
-        await CLIENT.sendImage("91" + number + "@c.us", req.file.path, `${filename}`, `${caption}`);
-        fs.unlink(req.file.path, (err) => {
-            if (err) throw err;
-        });
-        console.log(messageLimit);
-        res.status(200).send(caption + " is sent successfully to " + number);
-    }
-    else {
-        res.status(500).send("Message limit Reached. Renew Your Subscription");
-    }
-    //             }
-    //             else {
-    //                 res.send("Send an image file .png , .jpg , .jpeg");
-    //             }
-    //         }
-    //         else {
-    //             res.status(500).send("Internal Server Error");
-    //         }
-    //     }
-    //     else {
-    //         res.status(500).send("Internal Server Error");
-    //         console.log("The errors are " + error);
-    //     }
-    // });
+    connection.query(`select * from client_details where userID = ${username} and userPassword = '${userPassword}'`, async (error, results, fields) => {
+        if (results.length == 1) {
+            let totalMessage = results[0].message;
+            if (totalMessage - 1 >= 0) {
+                connection.query(`update client_details set message = ${totalMessage - 1} where userID = ${username} and userPassword = '${userPassword}'`);
+                if (req.file.mimetype == "image/jpg" || req.file.mimetype == "image/png" || req.file.mimetype == "image/jpeg") {
+                    let number = await req.body.number;
+                    let filename = await req.body.filename;
+                    let caption = await req.body.caption;
+                    await CLIENT.sendImage("91" + number + "@c.us", req.file.path, `${filename}`, `${caption}`);
+                    fs.unlink(req.file.path, (err) => {
+                        if (err) throw err;
+                    });
+                    res.status(200).send(caption + " is sent successfully to " + number);
+                }
+                else {
+                    res.status(500).send("Message limit Reached. Renew Your Subscription");
+                }
+            }
+            else {
+                res.send("Send an image file .png , .jpg , .jpeg");
+            }
+        }
+        else {
+            res.status(500).send("Internal Server Error");
+        }
+    });
 });
 
 app.post("/whatsapp-hatim/send-document", upload.single("document"), async (req, res) => {
-    // let username = await req.body.username;
-    // let userPassword = await req.body.userPassword;
+    let username = await req.body.username;
+    let userPassword = await req.body.userPassword;
 
-    // connection.query(`select * from client_details where userID = ${username} and userPassword = '${userPassword}'`, async (error, results, fields) => {
-    //     if (results.length == 1) {
-    //         let totalMessage = results[0].message;
-    //         if (totalMessage - 1 >= 0) {
-    //             connection.query(`update client_details set message = ${totalMessage - 1} where userID = ${username} and userPassword = '${userPassword}'`);
-    if (messageLimit - 1 >= 0) {
-        let number = await req.body.number;
-        let filename = await req.body.filename;
-        let caption = await req.body.caption;
-        let message = await req.body.message;
+    connection.query(`select * from client_details where userID = ${username} and userPassword = '${userPassword}'`, async (error, results, fields) => {
+        if (results.length == 1) {
+            let totalMessage = results[0].message;
+            if (totalMessage - 1 >= 0) {
+                connection.query(`update client_details set message = ${totalMessage - 1} where userID = ${username} and userPassword = '${userPassword}'`);
 
-        messageLimit--;
-        await CLIENT.sendFile("91" + number + "@c.us", req.file.path, { filename: filename, });
-        messageLimit--;
-        await CLIENT.sendText("91" + number + "@c.us", message);
-        fs.unlink(req.file.path, (err) => {
-            if (err) throw err;
-        });
-        console.log(messageLimit);
-        res.status(200).send(caption + " is sent successfully to " + number);
-    }
-    else {
-        res.status(500).send("Message limit Reached. Renew Your Subscription");
-    }
-    //         }
-    //         else {
-    //             res.status(500).send("Internal Server Error");
-    //         }
-    //     }
-    //     else {
-    //         res.status(500).send("Internal Server Error");
-    //         console.log("The errors are " + error);
-    //     }
-    // });
+                let number = await req.body.number;
+                let filename = await req.body.filename;
+                let caption = await req.body.caption;
+                let message = await req.body.message;
+
+
+                await CLIENT.sendFile("91" + number + "@c.us", req.file.path, { filename: filename, });
+
+                await CLIENT.sendText("91" + number + "@c.us", message);
+                fs.unlink(req.file.path, (err) => {
+                    if (err) throw err;
+                });
+
+                res.status(200).send(caption + " is sent successfully to " + number);
+            }
+            else {
+                res.status(500).send("Message limit Reached. Renew Your Subscription");
+            }
+        }
+        else {
+            res.status(500).send("Internal Server Error");
+        }
+    });
 });
 
 // app.post("/send-video", upload.single("video"), async (req, res) => {
